@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/Features/Auth/Screens/auth_screen.dart';
 import 'package:social_media_app/Features/CreatePost/Screens/create_post.dart';
+import 'package:social_media_app/Features/Home/Screens/post_detail_screen.dart';
 import 'package:social_media_app/Features/Home/Screens/top_bar_screen.dart';
 import 'package:social_media_app/Features/Splash/Screen/splash_screen.dart';
 import 'route_name.dart';
@@ -18,6 +19,9 @@ class Routes{
         return MaterialPageRoute(builder: (context)=>const SplashScreen());
       case RouteName.createPost:
         return MaterialPageRoute(builder: (context)=>const CreatePost());
+      case RouteName.postDetail:
+        final args = settings.arguments as Map<String,dynamic>;
+        return MaterialPageRoute(builder: (context)=> PostDetailScreen(appBar: args['appBar'], imgUrls: args['imageUrls']));
       default:
         return MaterialPageRoute(builder: (context)
         {

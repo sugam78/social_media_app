@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_media_app/Bloc/Friends/friends_bloc.dart';
-import 'package:social_media_app/Features/Home/Widgets/photo_grid.dart';
+import 'package:social_media_app/Core/Routes/route_name.dart';
+import 'package:social_media_app/Features/Home/Widgets/home/photo_grid.dart';
 import 'package:social_media_app/Models/user_model.dart';
-import '../../../Core/Constants/global_variables.dart';
+import '../../../../Core/Constants/global_variables.dart';
 
 class FriendsPosts extends StatelessWidget {
   const FriendsPosts({super.key});
@@ -24,7 +25,7 @@ class FriendsPosts extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: user.posts!.length,
                       itemBuilder: (context, ind) {
-                        final post = user.posts![ind];
+                        final post = user.posts![(user.posts!.length) -ind-1];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Column(
@@ -71,7 +72,12 @@ class FriendsPosts extends StatelessWidget {
                                 child: PhotoGrid(
                                   imageUrls: post.images!,
                                   onImageClicked: (val) {},
-                                  onExpandClicked: () {},
+                                  onExpandClicked: () {
+                                    Navigator.pushNamed(context, RouteName.postDetail,arguments: {
+                                      'appBar': '${user.name} Posts Images',
+                                      'imageUrls': post.images!
+                                    });
+                                  },
                                 ),
                               ):SizedBox(),
                             ],

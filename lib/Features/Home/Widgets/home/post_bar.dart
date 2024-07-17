@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_media_app/Bloc/UserBloc/user_bloc.dart';
 import 'package:social_media_app/Core/Routes/route_name.dart';
 
-import '../../../Core/Constants/global_variables.dart';
+import '../../../../Core/Constants/global_variables.dart';
 
 class PostBar extends StatelessWidget {
   const PostBar({super.key});
