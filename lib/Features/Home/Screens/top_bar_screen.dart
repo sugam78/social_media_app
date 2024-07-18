@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media_app/Core/Routes/route_name.dart';
 import 'package:social_media_app/Features/Home/Screens/add_friend_screen.dart';
 import 'package:social_media_app/Features/Home/Screens/home_screen.dart';
+import 'package:social_media_app/Features/Home/Services/friend_services.dart';
 
 class TopBarScreen extends StatefulWidget {
   const TopBarScreen({super.key});
@@ -35,7 +36,7 @@ class _TopBarScreenState extends State<TopBarScreen> {
           title: const Text('Welcome'),
           actions: [
             IconButton(onPressed: (){
-              Navigator.pushReplacementNamed(context, RouteName.auth);
+              FriendServices().logOut(context);
             }, icon: Icon(Icons.logout)),
           ],
           bottom: TabBar(

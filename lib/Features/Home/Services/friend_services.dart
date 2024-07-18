@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_media_app/Bloc/FriendRequestsBloc/friend_request_bloc.dart';
 import 'package:social_media_app/Bloc/Friends/friends_bloc.dart';
 import 'package:social_media_app/Bloc/UserBloc/user_bloc.dart';
 import 'package:social_media_app/Bloc/UserListBloc/user_list_bloc.dart';
 import 'package:social_media_app/Core/Constants/global_variables.dart';
 import 'package:social_media_app/Core/ErrorHandling/htpp_error_handle.dart';
+import 'package:social_media_app/Core/Routes/route_name.dart';
 import 'package:social_media_app/Core/Utilities/utils.dart';
 
 class FriendServices {
@@ -124,6 +126,17 @@ class FriendServices {
       httpErrorHandle(response, context, (){
         BlocProvider.of<FriendsBloc>(context).add(AddFriends(response.body));
       });
+
+    } catch (err) {
+      showSnackBar(context, err.toString());
+    }
+  }
+
+  Future<void> logOut(BuildContext context)async{
+    try {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      Navigator.pushReplacementNamed(context, RouteName.auth);
 
     } catch (err) {
       showSnackBar(context, err.toString());
